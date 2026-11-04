@@ -23,7 +23,7 @@ def connect_to_google():
         "https://www.googleapis.com/auth/spreadsheets",
         "https://www.googleapis.com/auth/drive",
     ]
-    # Read credentials directly from Streamlit Cloud Secrets
+    # Convert the Streamlit secrets mapping into a standard dictionary
     creds_dict = dict(st.secrets["gcp_service_account"])
     creds = Credentials.from_service_account_info(creds_dict, scopes=scopes)
     client = gspread.authorize(creds)
@@ -32,7 +32,6 @@ def connect_to_google():
     ).sheet1
 
 sheet = connect_to_google()
-
 
 # Let's add a loading text so we know what it's doing
 with st.spinner("Connecting to Google Sheets database..."):

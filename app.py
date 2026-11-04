@@ -7,9 +7,9 @@ from google.oauth2.service_account import Credentials
 
 # --- SECURITY: AUTHORIZED USERS ---
 VALID_USERS = {
-    "Ardra": "Ardra@1803"
-    "Dhanya": "1984"
-    "Arja": "080225"
+    "Ardra": "Ardra@1803",
+    "Dhanya": "1984",
+    "Arja": "080225",
 }
 
 if "logged_in" not in st.session_state:

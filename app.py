@@ -36,9 +36,6 @@ def connect_to_google():
     ).sheet1
 
 sheet = connect_to_google()
-# Let's add a loading text so we know what it's doing
-with st.spinner("Connecting to Google Sheets database..."):
-  sheet = connect_to_google()
 
 # Automatically add headers if the sheet is completely blank
 headers = ["username", "log_date", "last_period", "flow", "water", "sleep", "steps", "screen_time", "mood", "anxiety", "study_time", "pages_read", "had_migraine", "migraine_pain", "rating", "weather", "highlight", "grateful", "media", "book", "journal"]

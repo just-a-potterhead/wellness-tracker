@@ -32,7 +32,7 @@ def connect_to_google():
     creds = Credentials.from_service_account_info(creds_dict, scopes=scopes)
     client = gspread.authorize(creds)
     return client.open_by_url(
-        "https://docs.google.com/spreadsheets/d/129ZwB6nGV6cYrVChlwGRxz1ONtDzfbWXzyxRn_Khh8/edit?gid=0#gid="
+        "https://docs.google.com/spreadsheets/d/129ZwB6nGV6cyYRVChlwGRxz1ONtDzfbWXzyxRn_Khh8/edit?gid=0#gid=0"
     ).sheet1
 
 sheet = connect_to_google()

@@ -37,7 +37,6 @@ else:
         st.session_state["logged_in"] = False
         st.session_state["current_user"] = ""
         st.rerun()
-
 # --- GOOGLE SHEETS SETUP (V5 - Rate Limit Fixed) ---
 # The @st.cache_resource tag stops the app from spamming Google!
 @st.cache_resource

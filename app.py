@@ -16,6 +16,28 @@ if "logged_in" not in st.session_state:
     st.session_state["logged_in"] = False
     st.session_state["current_user"] = ""
 
+# --- LOGIN SCREEN ---
+if not st.session_state["logged_in"]:
+    st.markdown("## 🔒 Wellness Tracker Login")
+    username = st.text_input("Username")
+    password = st.text_input("Password", type="password")
+
+    if st.button("Login"):
+        if username in VALID_USERS and VALID_USERS[username] == password:
+            st.session_state["logged_in"] = True
+            st.session_state["current_user"] = username
+            st.rerun()
+        else:
+            st.error("Incorrect username or password.")
+else:
+    # --- MAIN APP CONTENT AFTER SUCCESSFUL LOGIN ---
+    st.success(f"Welcome back, {st.session_state['current_user']}!")
+    
+    if st.button("Log out"):
+        st.session_state["logged_in"] = False
+        st.session_state["current_user"] = ""
+        st.rerun()
+
 # --- GOOGLE SHEETS SETUP (V5 - Rate Limit Fixed) ---
 # The @st.cache_resource tag stops the app from spamming Google!
 @st.cache_resource

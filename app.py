@@ -17,19 +17,21 @@ if "logged_in" not in st.session_state:
 
 # --- GOOGLE SHEETS SETUP (V5 - Rate Limit Fixed) ---
 # The @st.cache_resource tag stops the app from spamming Google!
-# Remove @st.cache_resource for now so it doesn't freeze the spinner
+@st.cache_resource
 def connect_to_google():
-  scopes = [
-      "https://www.googleapis.com/auth/spreadsheets",
-      "https://www.googleapis.com/auth/drive",
-  ]
-  creds = Credentials.from_service_account_file(
-      "google_credentials.json", scopes=scopes
-  )
-  client = gspread.authorize(creds)
-  return client.open_by_url(
-      "https://docs.google.com/spreadsheets/d/129ZwB6nGV6cYrVChlwGRxz1ONtDzfbWXzyxRn_Khh8/edit?gid=0#gid="
-  ).sheet1
+    scopes = [
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive",
+    ]
+    # Read credentials directly from Streamlit Cloud Secrets
+    creds_dict = dict(st.secrets["gcp_service_account"])
+    creds = Credentials.from_service_account_info(creds_dict, scopes=scopes)
+    client = gspread.authorize(creds)
+    return client.open_by_url(
+        "https://docs.google.com/spreadsheets/d/129ZwB6nGV6cYrVChlwGRxz1ONtDzfbWXzyxRn_Khh8/edit?gid=0#gid="
+    ).sheet1
+
+sheet = connect_to_google()
 
 
 # Let's add a loading text so we know what it's doing

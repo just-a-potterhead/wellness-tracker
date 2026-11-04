@@ -19,10 +19,10 @@ if "logged_in" not in st.session_state:
 # --- LOGIN SCREEN ---
 if not st.session_state["logged_in"]:
     st.markdown("## 🔒 Wellness Tracker Login")
-    username = st.text_input("Username")
-    password = st.text_input("Password", type="password")
+    username = st.text_input("Username", key="login_username")
+    password = st.text_input("Password", type="password", key="login_password")
 
-    if st.button("Login"):
+    if st.button("Login", key="login_btn"):
         if username in VALID_USERS and VALID_USERS[username] == password:
             st.session_state["logged_in"] = True
             st.session_state["current_user"] = username
@@ -33,7 +33,7 @@ else:
     # --- MAIN APP CONTENT AFTER SUCCESSFUL LOGIN ---
     st.success(f"Welcome back, {st.session_state['current_user']}!")
     
-    if st.button("Log out"):
+    if st.button("Log out", key="logout_btn"):
         st.session_state["logged_in"] = False
         st.session_state["current_user"] = ""
         st.rerun()
